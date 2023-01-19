@@ -29,3 +29,19 @@ variable "tags" {
   description = "(Optional)"
   default = {}
 }
+
+##### ------- > Subnet variables
+
+variable "subnets" {
+  type = list(object({
+    name = string
+    address_prefixes = list(string)
+    service_endpoints = list(string)
+    delegations = list(object({
+      name = string
+      actions = list(string)
+    }))
+  }))
+  default = []
+}
+

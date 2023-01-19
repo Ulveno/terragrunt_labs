@@ -32,6 +32,22 @@ inputs = {
     resource_group_name      = dependency.resource_groups.outputs.vnet_resource_group_name
     address_space            = ["10.1.0.0/16"]
     location                 = local.location
+    subnets = [
+        {
+            name = "test-snet"
+            address_prefixes = ["10.1.10.0/24"]
+            service_endpoints = []
+            delegations = []
+        },
+           {
+            name = "hejsan-snet"
+            address_prefixes = ["10.1.20.0/24"]
+            service_endpoints = []
+            delegations = []
+        }
+
+     
+    ]
 
     tags = {
         environment = local.environment

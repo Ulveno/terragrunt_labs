@@ -48,6 +48,21 @@ inputs = {
 
      
     ]
+    nsg = [
+        {
+            nsg_name = "test"
+            tags     = local.environment
+            rule_name                    = "rule1"
+            priority                     = 200
+            direction                    = "*"
+            access                       = "*"
+            protocol                     = "*"
+            source_port_ranges           = []
+            destination_port_ranges      = []
+            source_address_prefixes      = []
+            destination_address_prefixes = []
+        }
+    ]
 
     tags = {
         environment = local.environment

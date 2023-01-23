@@ -45,3 +45,24 @@ variable "subnets" {
   default = []
 }
 
+##### ---------- > NSG vairables
+
+variable "nsg" {
+  type = list(object({
+    nsg_name = string
+    tags     = map(string)
+    security_rules = list(object({
+      rule_name = string
+      priority  = number
+      direction = string
+      access    = string
+      protocol  = string
+      source_port_ranges           = set(string)
+      destination_port_ranges      = set(string)
+      source_address_prefixes      = set(string)
+      destination_address_prefixes = set(string)
+    }))
+  }))
+  default = []
+}
+

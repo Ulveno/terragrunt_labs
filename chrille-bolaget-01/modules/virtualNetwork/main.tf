@@ -28,3 +28,59 @@ resource "azurerm_subnet" "subnet" {
      }
     }
 }
+
+resource "azurerm_network_security_group" "nsg" {
+  count = length(var.nsg)
+  name                = var.nsg[count.index].nsg_name
+  location            = azurerm_virtual_network.vnet.resource_group_name
+  resource_group_name = azurerm_virtual_network.vnet.resource_group_name
+  tags                = var.nsg[count.index].tags
+    dynamic "security_rule" {
+    for_each = length(var.nsg[count.index].security_rules) < 1 ? var.nsg[count.index].security_rules : []
+    content {
+       name                         = security_rule.value.rule_name
+       priority                     = security_rule.value.priority
+       direction                    = security_rule.value.direction
+       access                       = security_rule.value.access
+       protocol                     = security_rule.value.protocol
+       source_port_ranges           = security_rule.value.source_port_ranges
+       destination_port_ranges      = security_rule.value.destination_port_ranges
+       source_address_prefixes      = security_rule.value.source_address_prefixes
+       destination_address_prefixes = security_rule.value.destination_address_prefixes
+    }
+  }
+}
+
+#resource "azurerm_network_security_group" "example" {
+#  name                = "acceptanceTestSecurityGroup1"
+#  location            = azurerm_resource_group.example.location
+#  resource_group_name = azurerm_resource_group.example.name
+#
+#  security_rule {
+#    name                       = "test123"
+#    priority                   = 100
+#    direction                  = "Inbound"
+#    access                     = "Allow"
+#    protocol                   = "Tcp"
+#    source_port_range          = "*"
+#    destination_port_range     = "*"
+#    source_address_prefix      = "*"
+#    destination_address_prefix = "*"
+#  }
+#
+#  tags = {
+#    environment = "Production"
+#  }
+#}
+##
+#resource "azurerm_subnet_network_security_group_association" "nsg_association" {
+#  dynamic "nsg_association" {
+#    content = {
+#    name = "nsg_a"
+#
+#
+#    }
+#  }
+#  subnet_id                 = azurerm_subnet.example.id
+#  network_security_group_id = azurerm_network_security_group.example.id
+#}

@@ -5,5 +5,5 @@ include {
 }
 
 inputs = {
-    vnet_resource_group_name = "rg-example-vnet"
+    resource_group_name = "rg-common-prod-weu-001"
 }

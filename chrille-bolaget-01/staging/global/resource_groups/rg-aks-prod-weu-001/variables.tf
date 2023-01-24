@@ -5,7 +5,7 @@ variable "location" {
   description = "The Azure region to use"
 }
 
-variable "vnet_resource_group_name" {
+variable "resource_group_name" {
   type = string
   description = "The name of th vnet resource group"
 }

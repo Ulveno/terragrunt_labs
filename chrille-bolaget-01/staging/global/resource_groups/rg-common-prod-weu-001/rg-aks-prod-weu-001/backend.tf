@@ -2,7 +2,7 @@
 terraform {
   backend "azurerm" {
     container_name       = "terragrunt"
-    key                  = "chrille-bolaget-01/staging/global/resource_groups/terraform.tfstate"
+    key                  = "chrille-bolaget-01/staging/global/resource_groups/rg-common-prod-weu-001/rg-aks-prod-weu-001/terraform.tfstate"
     resource_group_name  = "cloudshellstorage"
     storage_account_name = "chrillecloudstorage"
     subscription_id      = "dd7b30f8-c637-48ab-a9c3-ed3dc4f285a9"
